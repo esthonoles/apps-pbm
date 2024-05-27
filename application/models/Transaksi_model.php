@@ -8,7 +8,8 @@ class Transaksi_model extends CI_Model
 
     function getharga($id)
     {
-        return $this->db->get_where('tbl_sampah', ['id' => $id])->row_array();
+    //    $id =  $this->input->post('id_sampah');
+        return $this->db->get_where('tbl_sampah', ['id'=>$id])->row();
     }
     // function gethargasampah($id)
     // {

@@ -73,11 +73,13 @@ class Transaksi extends CI_Controller
     }
 
     public function getharga()
+
     {
-        
-        $id = $this->input->get('id_sampah');
-        $data['hargasampah'] = $this->Transaksi_model->gethargasampah($id);
-        echo json_encode($data['hargasampah']);
+               
+        $id = $this->input->post('id_sampah');
+        $data['sampah'] = $this->Transaksi_model->getharga($id);
+
+        echo json_encode($data['sampah']);
 
         
 
