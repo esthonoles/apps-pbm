@@ -8,17 +8,12 @@ class Transaksi_model extends CI_Model
 
     function getharga($id)
     {
-    //    $id =  $this->input->post('id_sampah');
+    
         return $this->db->get_where('tbl_sampah', ['id'=>$id])->row();
     }
-    // function gethargasampah($id)
-    // {
-    //     // $id = $this->input->post('id_sampah');
 
-    //     $query = $this->db->get_where('tbl_sampah', ['id' => $id]);
-    //     return $query->row();
-    //     // return json_encode($query->row());
-    //     // echo json_encode($query);
-    //     // return $this->db->get_where('tbl_sampah', ['id' => $id])->row_array();
-    // }
+    function getsaldomember($id){
+        return $this->db->get_where('tbl_transaksi',['id_nasabah' => $id])->result();
+    }
+    
 }

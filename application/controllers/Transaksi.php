@@ -80,12 +80,26 @@ class Transaksi extends CI_Controller
         $data['sampah'] = $this->Transaksi_model->getharga($id);
 
         echo json_encode($data['sampah']);
+    }
 
-        
+    public function savedebit(){
+        $data = [
+            'kode_transaksi' => htmlspecialchars($this->input->post('kodetransaksi', true)),
+            'tgl_transaksi' => time(),
+            'id_nasabah' => htmlspecialchars($this->input->post('idnasabah',true)),
+            'id_sampah' => htmlspecialchars($this->input->post('id_sampah',true )),
+            'debit' => htmlspecialchars($this->input->post('debit',true)),
+            'kredit' => 0,
+            'berat' => htmlspecialchars($this->input->post('beratsampah',true))
+        ];
 
-        // return $data['hargasampah'] = $this->db->get_where('tbl_sampah', ['id' => $id]);
-        // return ->row_array();
-        // var_dump($data['hargasampah'])
-        // var_dump($data['hargasampah']);
+       $this->db->insert ('tbl_transaksi',$data);
+       $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            Transaksi berhasil ditambahkan
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>');
+            redirect('transaksi');
     }
 }

@@ -22,10 +22,11 @@
     <div class="col-lg-4 col-sm-12">
         <div class="small-box bg-warning p-3 h-4">
             <h4 class="text-bold text-body-emphasis card-header p-0">Total Saldo</h4>
-            <h5 class="m-auto">Rp.2.500,</h5>
+            <h5 class="m-auto">-</h5>
         </div>
     </div>
 </div>
+
 
 
 <div class="row">
@@ -38,25 +39,53 @@
                         <td>#</td>
                         <td>Kode Transaksi</td>
                         <td>Tanggal Transaksi</td>
+                        <td>Jenis Sampah</td>
+                        <td>Berat Sampah</td>
                         <td>Debit</td>
                         <td>Kredit</td>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $no = 1;
+                    foreach ($saldodebit as $d):?>
                     <tr>
-                        <td>1</td>
-                        <td>PBM-D/0514-002</td>
-                        <td>12-Mei-2024</td>
-                        <td>Rp.10.000,</td>
-                        <td>-</td>
+                        <td><?=$no++?></td>
+                        <td><?=$d->kode_transaksi?></td>
+                        
+                        <td><?= date('d F Y', $d->tgl_transaksi)?></td>
+                        <td><?=$d->id_sampah?></td>
+                        <td><?=$d->berat?> Kg</td>
+                        <td>
+                        <?php if($d->debit == 0){
+                            echo '-';
+                        }else{
+                            echo ('Rp.'.number_format($d->debit)." ,-");
+                        }
+                        
+                        ?>
+                        </td>
+                        <td>
+                        <?php if($d->kredit == 0){
+                            echo '-';
+                        }else{
+                            echo ('Rp.'.number_format($d->kredit)." ,-");
+                        }
+                        
+                        ?>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PBM-K/0514-002</td>
-                        <td>13-Mei-2024</td>
-                        <td>-</td>
-                        <td>Rp.7.500,</td>
-                    </tr>
+
+                    <?php 
+                  
+                    endforeach?>
+
+                    <?php echo '<tr>
+                    <td></td>
+                    </tr>'
+                    ?>
+
+                    
+                    
                 </tbody>
             </table>
         </div>

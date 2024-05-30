@@ -141,8 +141,13 @@ class Datamember extends CI_Controller
         }
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
+
         $this->load->model('Transaksi_model');
         $data['idnasabah'] = $this->Transaksi_model->GetNasabahByid($id);
+
+        $data['saldodebit'] = $this->Transaksi_model->getsaldomember($id);
+
+
 
 
         $data['title'] = 'Detail Akun';

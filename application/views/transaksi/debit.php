@@ -11,7 +11,7 @@ if ($kode != null) {
 }
 ?>
 
-<form action="">
+<form action="<?=base_url('transaksi/savedebit')?>" method="POST">
    <div class="row">
     <div class="col col-sm-12 col-md-3">
         <div class="small-box bg-warning p-3 h-4">
