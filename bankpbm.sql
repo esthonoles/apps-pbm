@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1deb3
+-- version 5.2.1-4.fc40
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 20, 2024 at 11:42 AM
--- Server version: 8.0.36-2ubuntu3
--- PHP Version: 8.3.6
+-- Host: localhost
+-- Generation Time: May 30, 2024 at 05:31 AM
+-- Server version: 10.11.6-MariaDB
+-- PHP Version: 8.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `role` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `role` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `role`
@@ -48,25 +48,24 @@ INSERT INTO `role` (`id`, `role`) VALUES
 --
 
 CREATE TABLE `tbl_member` (
-  `id` int NOT NULL,
-  `ktp` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `ktp` varchar(128) NOT NULL,
   `nama` varchar(128) NOT NULL,
   `tgl_lahir` date NOT NULL,
-  `no_hp` varchar(128) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `dated_created` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `no_hp` varchar(128) NOT NULL,
+  `dated_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
 INSERT INTO `tbl_member` (`id`, `ktp`, `nama`, `tgl_lahir`, `no_hp`, `dated_created`) VALUES
-(3, '3525171209940006', 'jhon d roger', '1992-12-09', '089387639823', 1714737406),
-(4, '00092321299', 'rose de pink', '2001-05-01', '089198239292', 1714738411),
-(5, '3525170101990006', 'abd wahid', '1999-01-01', '085232292844', 1714738788),
-(7, '3525171209940001', 'sihu oke', '2005-05-04', '0892390000000', 1714827302),
-(8, '0987783', 'Haidar', '2024-05-02', '0987029938', 1714827494),
-(9, '0989890923123', 'ivana', '2024-05-10', '0899023902313', 1715608050);
+(3, '12345', 'abd wahid', '2024-05-15', '123456', 1716524016),
+(4, '00901212', 'seho', '2024-05-10', '123457', 1716524133),
+(5, '11233444', 'Imam', '2024-05-18', '1234567', 1716524393),
+(6, '11111111111', 'test nasabah', '2024-05-25', '11111111111', 1716524673),
+(7, '0989787', 'asde', '2024-05-17', '098966', 1716525360);
 
 -- --------------------------------------------------------
 
@@ -75,18 +74,20 @@ INSERT INTO `tbl_member` (`id`, `ktp`, `nama`, `tgl_lahir`, `no_hp`, `dated_crea
 --
 
 CREATE TABLE `tbl_sampah` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nama` varchar(128) NOT NULL,
-  `harga` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `harga` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_sampah`
 --
 
 INSERT INTO `tbl_sampah` (`id`, `nama`, `harga`) VALUES
-(21, 'Kertas', 200),
-(22, 'Koran', 50);
+(13, 'Bodrex', 900),
+(14, 'Duplex', 100),
+(15, 'Botol Aqua', 500),
+(21, 'karung', 10);
 
 -- --------------------------------------------------------
 
@@ -95,23 +96,27 @@ INSERT INTO `tbl_sampah` (`id`, `nama`, `harga`) VALUES
 --
 
 CREATE TABLE `tbl_transaksi` (
-  `id` int NOT NULL,
-  `kode_transaksi` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `tgl_transaksi` date NOT NULL,
-  `id_nasabah` int NOT NULL,
-  `id_sampah` int NOT NULL,
-  `debit` int NOT NULL,
-  `kredit` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `kode_transaksi` varchar(20) NOT NULL,
+  `tgl_transaksi` int(11) NOT NULL,
+  `id_nasabah` int(11) NOT NULL,
+  `id_sampah` int(11) NOT NULL,
+  `debit` int(11) NOT NULL,
+  `kredit` int(11) NOT NULL,
   `berat` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_transaksi`
 --
 
 INSERT INTO `tbl_transaksi` (`id`, `kode_transaksi`, `tgl_transaksi`, `id_nasabah`, `id_sampah`, `debit`, `kredit`, `berat`) VALUES
-(4, 'PBM-D/14/05/001', '2024-05-08', 2, 3, 0, 0, 10),
-(5, 'PBM-D/14/05/002', '2024-05-14', 1, 1, 0, 0, 40);
+(5, 'PBM-D/30/05/001', 1717043679, 3, 13, 9900, 0, 11),
+(6, 'PBM-D/30/05/002', 1717043708, 4, 13, 10800, 0, 12),
+(7, 'PBM-D/30/05/003', 1717044289, 3, 13, 9900, 0, 11),
+(8, 'PBM-D/30/05/004', 1717045008, 3, 15, 5000, 0, 10),
+(9, 'PBM-k/30/05/001', 1717045008, 3, 15, 0, 5000, 0),
+(10, 'PBM-D/30/05/002', 1717046883, 4, 21, 20, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -120,13 +125,13 @@ INSERT INTO `tbl_transaksi` (`id`, `kode_transaksi`, `tgl_transaksi`, `id_nasaba
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
-  `role_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `nama` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` text NOT NULL,
-  `date_created` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
@@ -162,14 +167,7 @@ ALTER TABLE `tbl_sampah`
 -- Indexes for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_nasabah` (`id_nasabah`),
-  ADD UNIQUE KEY `id_sampah` (`id_sampah`),
-  ADD UNIQUE KEY `id_nasabah_4` (`id_nasabah`),
-  ADD KEY `id_sampah_2` (`id_sampah`),
-  ADD KEY `id_nasabah_2` (`id_nasabah`),
-  ADD KEY `id_nasabah_3` (`id_nasabah`,`id_sampah`),
-  ADD KEY `id_nasabah_5` (`id_nasabah`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -187,31 +185,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_sampah`
 --
 ALTER TABLE `tbl_sampah`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
